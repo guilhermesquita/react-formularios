@@ -2,26 +2,20 @@ import React, { useState } from 'react'
 import { MainContainer, Form, Input } from './styles'
 
 function MainPage() {
-  const [nome, setNome] = useState("")
-  const [idade, setIdade] = useState("")
-  const [email, setEmail] = useState("")
+  const [formulario, setFormulario] = useState({
+    nome: '', 
+    idade: '', 
+    email: ''})
 
-  const onChangeNome = (event) => {
-    setNome(event.target.value)
-  }
-
-  const onChangeIdade = (event) => {
-    setIdade(event.target.value)
-  }
-
-  const onChangeEmail = (event) => {
-    setEmail(event.target.value)
+  const handleValues = (e) => {
+    //const key = e.target.name
+    const { name, value} = e.target
+    setFormulario({...formulario, [name]: value})
+    console.log(formulario)
   }
 
   const handleClick = (event) => {
     event.preventDefault()
-
-    console.log(`nome: ${nome}, idade: ${idade}, e-mail: ${email} `)
   }
 
   return (
@@ -31,23 +25,26 @@ function MainPage() {
       <Form onSubmit={handleClick}>
         <label htmlFor="nome">Nome:</label>
         <Input 
+          name='nome'
           id="nome"
-          value={nome}
-          onChange={onChangeNome}
+          value={formulario.nome}
+          onChange={handleValues}
         />
 
         <label htmlFor="idade">Idade:</label>
         <Input 
+          name='idade'
           id="idade"
-          value={idade}
-          onChange={onChangeIdade}
+          value={formulario.idade}
+          onChange={handleValues}
         />
 
         <label htmlFor="email">E-mail:</label>
         <Input 
+          name='email'
           id="email"
-          value={email}
-          onChange={onChangeEmail}
+          value={formulario.email}
+          onChange={handleValues}
         />
         
         
